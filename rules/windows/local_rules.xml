@@ -1,0 +1,46 @@
+<!-- Local rules -->
+
+<!-- Modify it at your will. -->
+<!-- Copyright (C) 2015, Wazuh Inc. -->
+
+<!-- Example -->
+<group name="local,syslog,sshd,">
+
+    <!-- Cyberion ThreatShield: Account Discovery -->
+  <rule id="100010" level="5">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\net1?\.exe$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)\buser\b</field>
+    <field name="win.eventdata.parentImage" type="pcre2" negate="yes">(?i)\\wazuh-agent\.exe$</field>
+    <description>Cyberion: Windows account discovery using net user command.</description>
+    <mitre>
+      <id>T1087</id>
+    </mitre>
+    <group>cyberion,account_discovery,sysmon,</group>
+  </rule>
+
+  <!-- Cyberion ThreatShield: Repeated Failed Logins -->
+  <rule id="100011" level="10" frequency="5" timeframe="120">
+    <if_matched_sid>60122</if_matched_sid>
+    <same_field>win.eventdata.targetUserName</same_field>
+    <description>Cyberion: Possible brute-force attack - 5 failed logins for the same account within 120 seconds.</description>
+    <mitre>
+      <id>T1110.001</id>
+    </mitre>
+    <group>cyberion,authentication,brute_force,correlation,</group>
+  </rule>
+
+
+  <!-- Cyberion ThreatShield: PowerShell Download Activity -->
+  <rule id="100012" level="8">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\powershell\.exe$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)(Invoke-WebRequest|\biwr\b|DownloadString|DownloadFile|Start-BitsTransfer|System\.Net\.WebClient)</field>
+    <description>Cyberion: Suspicious PowerShell download command detected.</description>
+    <mitre>
+      <id>T1105</id>
+    </mitre>
+    <group>cyberion,powershell,download_activity,sysmon,</group>
+  </rule>
+
+</group>
