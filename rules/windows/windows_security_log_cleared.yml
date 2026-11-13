@@ -1,0 +1,20 @@
+title: Windows Security Audit Log Cleared
+id: 6f7b2e2a-8a41-4c3b-9d6e-110200000001
+status: experimental
+description: Detects clearing of the Windows Security audit log.
+references:
+    - https://attack.mitre.org/techniques/T1070/001/
+author: Cyberion ThreatShield
+date: 2026/11/13
+tags:
+    - attack.t1685.005
+logsource:
+    product: windows
+    service: security
+detection:
+    selection:
+        EventID: 1102
+    condition: selection
+falsepositives:
+    - Authorized security log maintenance
+level: high
