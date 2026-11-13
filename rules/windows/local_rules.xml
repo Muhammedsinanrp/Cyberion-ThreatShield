@@ -30,7 +30,7 @@
     <group>cyberion,authentication,brute_force,correlation,</group>
   </rule>
 
-
+  
   <!-- Cyberion ThreatShield: PowerShell Download Activity -->
   <rule id="100012" level="8">
     <if_group>sysmon_event1</if_group>
@@ -41,6 +41,17 @@
       <id>T1105</id>
     </mitre>
     <group>cyberion,powershell,download_activity,sysmon,</group>
+  </rule>
+  <!-- Cyberion ThreatShield: Windows Service Installation -->
+  <rule id="100013" level="7">
+    <field name="win.system.channel">^Security$</field>
+    <field name="win.system.providerName">^Microsoft-Windows-Security-Auditing$</field>
+    <field name="win.system.eventID">^4697$</field>
+    <description>Cyberion: Windows service installation detected.</description>
+    <mitre>
+      <id>T1543.003</id>
+    </mitre>
+    <group>cyberion,persistence,service_installation,windows_security,</group>
   </rule>
 
 </group>
