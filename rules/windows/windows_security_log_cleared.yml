@@ -3,7 +3,7 @@ id: 6f7b2e2a-8a41-4c3b-9d6e-110200000001
 status: experimental
 description: Detects clearing of the Windows Security audit log.
 references:
-    - https://attack.mitre.org/techniques/T1070/001/
+    - https://attack.mitre.org/techniques/T1685/005/
 author: Cyberion ThreatShield
 date: 2026/11/13
 tags:
