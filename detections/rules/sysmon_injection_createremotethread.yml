@@ -1,0 +1,43 @@
+title: Cross-Process Remote Thread Injection into System Processes
+id: b8173429-0192-4c28-9844-37829104eddd
+status: production
+description: |
+  Detects Sysmon Event ID 8 (CreateRemoteThread) where an untrusted process (such as PowerShell, cmd, or an unclassified binary)
+  injects execution threads into critical Windows system processes (such as explorer.exe, svchost.exe, or lsass.exe).
+  This technique is heavily utilized by Cobalt Strike, Metasploit, and advanced malware to evade defense and migrate processes.
+references:
+  - https://attack.mitre.org/techniques/T1055/002/
+author: Cyberion Defense Labs — Detection Engineering Practice
+date: 2026-10-15
+modified: 2026-11-10
+tags:
+  - attack.privilege_escalation
+  - attack.defense_evasion
+  - attack.t1055.002
+logsource:
+  category: create_remote_thread
+  product: windows
+detection:
+  selection_target:
+    TargetImage|endswith:
+      - '\explorer.exe'
+      - '\svchost.exe'
+      - '\lsass.exe'
+      - '\services.exe'
+  selection_source:
+    SourceImage|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\cmd.exe'
+      - '\cscript.exe'
+      - '\wscript.exe'
+      - '\rundll32.exe'
+  filter_legit_debug:
+    SourceImage|contains:
+      - 'C:\Program Files\'
+      - 'C:\Program Files (x86)\'
+  condition: selection_target and selection_source and not filter_legit_debug
+falsepositives:
+  - Diagnostic debuggers (e.g. Visual Studio, WinDbg) attaching to processes for profiling.
+  - Endpoint security agents injecting hooking DLLs into target binaries.
+level: critical

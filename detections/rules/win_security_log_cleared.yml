@@ -1,0 +1,25 @@
+title: Windows Security Event Log Cleared
+id: f71e9842-832a-4f51-b883-29471de8e444
+status: production
+description: |
+  Detects the clearing of the Windows Security Event Log (Event ID 1102). Adversaries clear event logs to hinder
+  incident response investigation and destroy forensic evidence of their intrusion and lateral movement.
+references:
+  - https://attack.mitre.org/techniques/T1070/001/
+author: Cyberion Defense Labs — Detection Engineering Practice
+date: 2026-10-15
+modified: 2026-11-10
+tags:
+  - attack.defense_evasion
+  - attack.t1070.001
+logsource:
+  service: security
+  product: windows
+detection:
+  selection:
+    EventID: 1102
+  condition: selection
+falsepositives:
+  - Automated log rollover in unconfigured test environments (should not occur in production enterprise).
+  - System decommissioning or re-imaging procedures by authorized infrastructure engineers.
+level: high

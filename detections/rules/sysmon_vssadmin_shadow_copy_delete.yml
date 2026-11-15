@@ -1,0 +1,36 @@
+title: Volume Shadow Copy Deletion via VSSAdmin
+id: 41a7c093-9c8e-49b8-a723-95843210eaaa
+status: production
+description: |
+  Detects the execution of vssadmin.exe with arguments to delete volume shadow copies (delete shadows /all /quiet).
+  This behavior is a high-confidence indicator of ransomware preparing to encrypt system volumes while preventing
+  administrators from restoring backups.
+references:
+  - https://attack.mitre.org/techniques/T1490/
+author: Cyberion Defense Labs — Detection Engineering Practice
+date: 2026-10-15
+modified: 2026-11-10
+tags:
+  - attack.impact
+  - attack.t1490
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_img:
+    - Image|endswith: '\vssadmin.exe'
+    - OriginalFileName: 'VSSADMIN.EXE'
+  selection_cmd:
+    CommandLine|contains:
+      - 'delete'
+      - 'shadows'
+  selection_all:
+    CommandLine|contains:
+      - '/all'
+      - '-all'
+      - '/quiet'
+      - '-quiet'
+  condition: selection_img and selection_cmd and selection_all
+falsepositives:
+  - Storage maintenance scripts executed during clean volume rebuilds (extremely rare in enterprise operations).
+level: critical

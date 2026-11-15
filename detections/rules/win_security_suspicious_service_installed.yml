@@ -1,0 +1,60 @@
+title: Suspicious Windows Service Installation via Service Control Manager
+id: 82b45100-36a8-4e1b-8519-75a892b1e555
+status: production
+description: |
+  Detects the installation of a new Windows service (System Event ID 7045 or Security Event ID 4697) where the service
+  binary path resides in suspicious directories (such as Temp, Public, AppData) or matches known lateral movement
+  tools (such as PsExec).
+references:
+  - https://attack.mitre.org/techniques/T1543/003/
+  - https://attack.mitre.org/techniques/T1021/002/
+author: Cyberion Defense Labs — Detection Engineering Practice
+date: 2026-10-15
+modified: 2026-11-10
+tags:
+  - attack.persistence
+  - attack.privilege_escalation
+  - attack.lateral_movement
+  - attack.t1543.003
+  - attack.t1021.002
+logsource:
+  product: windows
+  service:
+    - system
+    - security
+detection:
+  selection_event:
+    EventID:
+      - 7045
+      - 4697
+  selection_suspicious_paths:
+    - ImagePath|contains:
+        - '\AppData\'
+        - '\Users\Public\'
+        - '\Temp\'
+        - '\Windows\Temp\'
+        - 'ADMIN$'
+        - 'C$\'
+    - ServiceFileName|contains:
+        - '\AppData\'
+        - '\Users\Public\'
+        - '\Temp\'
+        - '\Windows\Temp\'
+        - 'ADMIN$'
+        - 'C$\'
+  selection_known_tools:
+    - ServiceName|contains:
+        - 'PSEXESVC'
+        - 'winexe'
+        - 'PAExec'
+    - ImagePath|contains:
+        - 'PSEXESVC.exe'
+        - 'PAExec.exe'
+    - ServiceFileName|contains:
+        - 'PSEXESVC.exe'
+        - 'PAExec.exe'
+  condition: selection_event and (selection_suspicious_paths or selection_known_tools)
+falsepositives:
+  - Legitimate administrative remote management via Sysinternals PsExec by authorized domain administrators.
+  - Software installers executing temporary setup services from %TEMP% with valid vendor signatures.
+level: high

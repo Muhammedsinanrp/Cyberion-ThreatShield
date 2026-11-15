@@ -1,0 +1,40 @@
+title: LSASS Process Memory Dumping via ProcDump
+id: d4a89e17-73d6-4442-9988-8123af65e333
+status: production
+description: |
+  Detects the execution of Microsoft Sysinternals ProcDump targeting the Local Security Authority Subsystem Service (lsass.exe)
+  to generate a process memory dump. Attackers extract plaintext passwords, hashes, and Kerberos tickets from LSASS dumps.
+references:
+  - https://attack.mitre.org/techniques/T1003/001/
+  - https://learn.microsoft.com/en-us/sysinternals/downloads/procdump
+author: Cyberion Defense Labs — Detection Engineering Practice
+date: 2026-10-15
+modified: 2026-11-10
+tags:
+  - attack.credential_access
+  - attack.t1003.001
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_img:
+    - Image|endswith:
+        - '\procdump.exe'
+        - '\procdump64.exe'
+        - '\procdump64a.exe'
+    - OriginalFileName: 'procdump.exe'
+    - CommandLine|contains:
+        - 'procdump'
+  selection_target:
+    CommandLine|contains:
+      - 'lsass'
+      - 'lsass.exe'
+  selection_dump_flag:
+    CommandLine|contains:
+      - '-ma'
+      - '-mm'
+      - '-mp'
+  condition: selection_img and selection_target and selection_dump_flag
+falsepositives:
+  - Legitimate system troubleshooting by Tier-3 infrastructure or identity engineering teams debugging LSASS memory leaks or crashes.
+level: critical

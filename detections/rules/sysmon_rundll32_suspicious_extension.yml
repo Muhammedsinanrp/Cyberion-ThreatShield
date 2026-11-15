@@ -1,0 +1,42 @@
+title: Rundll32 Execution with Non-Standard Extension or Suspicious Path
+id: 92a1048b-37fe-4d22-811c-2236541ae888
+status: production
+description: |
+  Detects the execution of rundll32.exe loading payload files with anomalous file extensions (such as .bin, .dat, .tmp,
+  or .png) or loading modules directly from user-writable directories (Temp, Public, AppData). Attackers use rundll32
+  to proxy execution of obfuscated DLLs and shellcode loaders.
+references:
+  - https://attack.mitre.org/techniques/T1218/011/
+  - https://lolbas-project.github.io/lolbas/Binaries/Rundll32/
+author: Cyberion Defense Labs — Detection Engineering Practice
+date: 2026-10-15
+modified: 2026-11-10
+tags:
+  - attack.defense_evasion
+  - attack.t1218.011
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_img:
+    - Image|endswith: '\rundll32.exe'
+    - OriginalFileName: 'RUNDLL32.EXE'
+  selection_suspicious_ext:
+    CommandLine|contains:
+      - '.bin'
+      - '.dat'
+      - '.tmp'
+      - '.txt'
+      - '.png'
+      - '.jpg'
+      - '.ocx'
+  selection_suspicious_path:
+    CommandLine|contains:
+      - '\Users\Public\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\Windows\Temp\'
+  condition: selection_img and (selection_suspicious_ext or selection_suspicious_path)
+falsepositives:
+  - Third-party legacy business applications executing specialized plugin modules with non-standard extensions.
+level: medium

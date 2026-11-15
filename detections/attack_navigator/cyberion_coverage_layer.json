@@ -1,0 +1,244 @@
+{
+  "name": "Cyberion Defense Labs — MITRE ATT&CK Coverage Matrix Layer",
+  "versions": {
+    "attack": "14",
+    "navigator": "4.9.1",
+    "layer": "4.5"
+  },
+  "domain": "enterprise-attack",
+  "description": "Detection Coverage, Partial Coverage, and Gap Analysis for Cyberion Defense Labs (CDL-DET-V2). Evaluates 24 enterprise techniques across 10 tactics.",
+  "sorting": 0,
+  "viewMode": 0,
+  "hideDisabled": false,
+  "gradient": {
+    "colors": [
+      "#e57373",
+      "#fff176",
+      "#81c784"
+    ],
+    "minValue": 0,
+    "maxValue": 100
+  },
+  "legendItems": [
+    {
+      "color": "#81c784",
+      "label": "Covered (100) — Validated Production Sigma Detection Rule"
+    },
+    {
+      "color": "#fff176",
+      "label": "Partially Covered (50) — Proactive Hunt or Incomplete Telemetry Coverage"
+    },
+    {
+      "color": "#e57373",
+      "label": "Not Covered (0) — Unmitigated Detection Gap (Roadmap Priority)"
+    }
+  ],
+  "metadata": [
+    {
+      "name": "Project Code",
+      "value": "CDL-DET-V2"
+    },
+    {
+      "name": "Document Owner",
+      "value": "Manager, Detection Engineering"
+    },
+    {
+      "name": "Version",
+      "value": "2.0"
+    }
+  ],
+  "techniques": [
+    {
+      "techniqueID": "T1078",
+      "tactic": "initial-access",
+      "score": 100,
+      "color": "#81c784",
+      "comment": "Covered by correlation_failed_logon_burst_followed_by_success.yml (c1894723-5e91-4478-bc02-19283746eeee)",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1190",
+      "tactic": "initial-access",
+      "score": 50,
+      "color": "#fff176",
+      "comment": "Partially Covered: WAF access logs capture web exploitation attempts, but endpoint exploitation telemetry lacks kernel-level memory hooking.",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1566",
+      "tactic": "initial-access",
+      "score": 0,
+      "color": "#e57373",
+      "comment": "Not Covered: Email gateway / SEG telemetry currently isolated from core SIEM streaming pipeline.",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1059.001",
+      "tactic": "execution",
+      "score": 100,
+      "color": "#81c784",
+      "comment": "Covered by sysmon_powershell_download_cradle.yml (a93b41d0-68e1-4c19-91eb-723a1d95e222)",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1047",
+      "tactic": "execution",
+      "score": 100,
+      "color": "#81c784",
+      "comment": "Covered by sysmon_wmic_process_creation.yml (18f793b5-4a11-479e-a890-843190dae999)",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1053.005",
+      "tactic": "persistence",
+      "score": 100,
+      "color": "#81c784",
+      "comment": "Covered by sysmon_suspicious_scheduled_task_creation.yml (55c19082-3f12-4d88-b991-82736450eccc)",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1543.003",
+      "tactic": "persistence",
+      "score": 100,
+      "color": "#81c784",
+      "comment": "Covered by win_security_suspicious_service_installed.yml (82b45100-36a8-4e1b-8519-75a892b1e555)",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1055.002",
+      "tactic": "privilege-escalation",
+      "score": 100,
+      "color": "#81c784",
+      "comment": "Covered by sysmon_injection_createremotethread.yml (b8173429-0192-4c28-9844-37829104eddd)",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1068",
+      "tactic": "privilege-escalation",
+      "score": 50,
+      "color": "#fff176",
+      "comment": "Partially Covered: Token elevation logged via WinSec 4672, but unpatched kernel exploits without process spawns evade detection.",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1070.001",
+      "tactic": "defense-evasion",
+      "score": 100,
+      "color": "#81c784",
+      "comment": "Covered by win_security_log_cleared.yml (f71e9842-832a-4f51-b883-29471de8e444)",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1127.001",
+      "tactic": "defense-evasion",
+      "score": 100,
+      "color": "#81c784",
+      "comment": "Covered by sysmon_msbuild_process_execution.yml (7c659102-124b-449e-8c31-6e8721fae666)",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1218.010",
+      "tactic": "defense-evasion",
+      "score": 100,
+      "color": "#81c784",
+      "comment": "Covered by sysmon_regsvr32_network_activity.yml (3e891b24-90a1-4389-9a2e-43618765e777)",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1218.011",
+      "tactic": "defense-evasion",
+      "score": 100,
+      "color": "#81c784",
+      "comment": "Covered by sysmon_rundll32_suspicious_extension.yml (92a1048b-37fe-4d22-811c-2236541ae888)",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1003.001",
+      "tactic": "credential-access",
+      "score": 100,
+      "color": "#81c784",
+      "comment": "Covered by sysmon_lsass_dumping_procdump.yml (d4a89e17-73d6-4442-9988-8123af65e333) and correlation_credential_dump_to_network_beaconing.yml",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1110.003",
+      "tactic": "credential-access",
+      "score": 100,
+      "color": "#81c784",
+      "comment": "Covered by correlation_failed_logon_burst_followed_by_success.yml (c1894723-5e91-4478-bc02-19283746eeee)",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1558.003",
+      "tactic": "credential-access",
+      "score": 100,
+      "color": "#81c784",
+      "comment": "Covered by win_security_kerberoasting_ticket_request.yml (63b8214f-5182-42da-a590-71829302ebbb)",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1087",
+      "tactic": "discovery",
+      "score": 100,
+      "color": "#81c784",
+      "comment": "Covered by correlation_recon_enumeration_to_psexec_lateral.yml (e7284910-6a12-4029-9e81-28374650ffff)",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1018",
+      "tactic": "discovery",
+      "score": 50,
+      "color": "#fff176",
+      "comment": "Partially Covered: Covered during manual threat hunts; automated alerting suppressed to avoid benign admin noise.",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1021.002",
+      "tactic": "lateral-movement",
+      "score": 100,
+      "color": "#81c784",
+      "comment": "Covered by win_security_suspicious_service_installed.yml and correlation_recon_enumeration_to_psexec_lateral.yml",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1105",
+      "tactic": "command-and-control",
+      "score": 100,
+      "color": "#81c784",
+      "comment": "Covered by sysmon_certutil_download.yml (5b2e1e0a-42c2-4a0b-8d5c-9c7ef2b6e111) and sysmon_powershell_download_cradle.yml",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1071.001",
+      "tactic": "command-and-control",
+      "score": 100,
+      "color": "#81c784",
+      "comment": "Covered by correlation_credential_dump_to_network_beaconing.yml and Threat Hunt 001 (Beaconing Analytics)",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1071.004",
+      "tactic": "command-and-control",
+      "score": 50,
+      "color": "#fff176",
+      "comment": "Partially Covered: Hunted via Zeek DNS entropy scripts; real-time streaming DNS rule requires SIEM streaming analytics engine.",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1490",
+      "tactic": "impact",
+      "score": 100,
+      "color": "#81c784",
+      "comment": "Covered by sysmon_vssadmin_shadow_copy_delete.yml (41a7c093-9c8e-49b8-a723-95843210eaaa)",
+      "enabled": true
+    },
+    {
+      "techniqueID": "T1567",
+      "tactic": "exfiltration",
+      "score": 0,
+      "color": "#e57373",
+      "comment": "Not Covered: Outbound exfiltration to legitimate cloud storage (Dropbox, Mega, OneDrive) is not covered without CASB/DLP integration.",
+      "enabled": true
+    }
+  ]
+}

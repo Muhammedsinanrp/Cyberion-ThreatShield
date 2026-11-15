@@ -1,0 +1,41 @@
+title: Suspicious Execution of MSBuild Compiling Inline XML or Project
+id: 7c659102-124b-449e-8c31-6e8721fae666
+status: production
+description: |
+  Detects the execution of Microsoft Build Engine (msbuild.exe) outside of standard developer workflows or compiling
+  untrusted XML/CSPROJ payload files stored in user-writable paths. Adversaries abuse MSBuild as a trusted signed
+  binary proxy to bypass Application Whitelisting and execute arbitrary inline C# tasks.
+references:
+  - https://attack.mitre.org/techniques/T1127/001/
+  - https://lolbas-project.github.io/lolbas/Binaries/Msbuild/
+author: Cyberion Defense Labs — Detection Engineering Practice
+date: 2026-10-15
+modified: 2026-11-10
+tags:
+  - attack.defense_evasion
+  - attack.t1127.001
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_img:
+    - Image|endswith: '\msbuild.exe'
+    - OriginalFileName: 'MSBuild.exe'
+  selection_paths:
+    CommandLine|contains:
+      - '\Users\Public\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\Windows\Temp\'
+      - '.xml'
+      - '.csproj'
+      - '.txt'
+  filter_visual_studio:
+    ParentImage|contains:
+      - '\Microsoft Visual Studio\'
+      - '\Common7\IDE\devenv.exe'
+      - '\MSBuild\'
+  condition: selection_img and selection_paths and not filter_visual_studio
+falsepositives:
+  - Software development builds on non-standard developer environments without Visual Studio parentage.
+level: medium

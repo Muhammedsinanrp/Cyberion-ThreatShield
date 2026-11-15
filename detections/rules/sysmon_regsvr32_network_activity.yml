@@ -1,0 +1,39 @@
+title: Regsvr32 Squiblydoo Remote Scriptlet Execution
+id: 3e891b24-90a1-4389-9a2e-43618765e777
+status: production
+description: |
+  Detects the execution of regsvr32.exe invoking scrobj.dll with the '/i:' parameter specifying an external HTTP/HTTPS URL
+  or remote scriptlet (Squiblydoo attack technique). This allows adversaries to bypass AppLocker and execute arbitrary
+  VBScript or JScript payloads in memory.
+references:
+  - https://attack.mitre.org/techniques/T1218/010/
+  - https://lolbas-project.github.io/lolbas/Binaries/Regsvr32/
+author: Cyberion Defense Labs — Detection Engineering Practice
+date: 2026-10-15
+modified: 2026-11-10
+tags:
+  - attack.defense_evasion
+  - attack.t1218.010
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_img:
+    - Image|endswith: '\regsvr32.exe'
+    - OriginalFileName: 'regsvr32.exe'
+  selection_scrobj:
+    CommandLine|contains:
+      - 'scrobj.dll'
+      - 'scrobj'
+  selection_remote:
+    CommandLine|contains:
+      - '/i:http'
+      - '-i:http'
+      - '/i:ftp'
+      - '-i:ftp'
+      - 'http://'
+      - 'https://'
+  condition: selection_img and (selection_scrobj or selection_remote)
+falsepositives:
+  - Extremely rare in modern enterprise networks. Legacy line-of-business component registration over HTTP.
+level: high

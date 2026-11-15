@@ -1,0 +1,38 @@
+title: WMIC Remote Process Creation
+id: 18f793b5-4a11-479e-a890-843190dae999
+status: production
+description: |
+  Detects the execution of the Windows Management Instrumentation Command-line (WMIC) utility invoking 'process call create'
+  with remote node flags (/node:). Adversaries use WMIC for stealth remote process execution, lateral movement, and
+  command execution without dropping service binaries.
+references:
+  - https://attack.mitre.org/techniques/T1047/
+author: Cyberion Defense Labs — Detection Engineering Practice
+date: 2026-10-15
+modified: 2026-11-10
+tags:
+  - attack.execution
+  - attack.lateral_movement
+  - attack.t1047
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_img:
+    - Image|endswith: '\wmic.exe'
+    - OriginalFileName: 'wmic.exe'
+  selection_cmd:
+    CommandLine|contains:
+      - 'process'
+  selection_create:
+    CommandLine|contains:
+      - 'call'
+      - 'create'
+  selection_node:
+    CommandLine|contains:
+      - '/node:'
+      - '-node:'
+  condition: selection_img and selection_cmd and selection_create and selection_node
+falsepositives:
+  - Enterprise systems administration scripts or legacy monitoring agents (e.g. older BMC Remedy or Nagios plugins).
+level: high

@@ -1,0 +1,41 @@
+title: Suspicious Scheduled Task Creation via Schtasks
+id: 55c19082-3f12-4d88-b991-82736450eccc
+status: production
+description: |
+  Detects the creation of scheduled tasks using schtasks.exe configuring tasks that execute binaries from user-writable
+  paths (such as Users\Public, Temp, AppData) or configure tasks to run under high-privilege SYSTEM authority.
+  Adversaries establish persistence and elevate privileges using scheduled tasks.
+references:
+  - https://attack.mitre.org/techniques/T1053/005/
+author: Cyberion Defense Labs — Detection Engineering Practice
+date: 2026-10-15
+modified: 2026-11-10
+tags:
+  - attack.persistence
+  - attack.privilege_escalation
+  - attack.t1053.005
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_img:
+    - Image|endswith: '\schtasks.exe'
+    - OriginalFileName: 'schtasks.exe'
+  selection_create:
+    CommandLine|contains:
+      - '/create'
+      - '-create'
+  selection_suspicious:
+    CommandLine|contains:
+      - '\Users\Public\'
+      - '\AppData\'
+      - '\Temp\'
+      - '\Windows\Temp\'
+      - '/ru "SYSTEM"'
+      - '/ru SYSTEM'
+      - '/sc onlogon'
+      - '/sc onstart'
+  condition: selection_img and selection_create and selection_suspicious
+falsepositives:
+  - Legitimate enterprise deployment tools or software updaters (e.g. Google Update, Adobe Updater) configuring tasks.
+level: medium

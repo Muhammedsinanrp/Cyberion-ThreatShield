@@ -1,0 +1,55 @@
+title: Suspicious PowerShell Download Cradle Execution
+id: a93b41d0-68e1-4c19-91eb-723a1d95e222
+status: production
+description: |
+  Detects PowerShell process creation executing download cradle commands (such as Net.WebClient, DownloadString,
+  DownloadFile, Invoke-WebRequest, or iwr) in combination with execution policy bypass or hidden window flags.
+  Adversaries use download cradles to execute in-memory or stage remote scripts.
+references:
+  - https://attack.mitre.org/techniques/T1059/001/
+  - https://attack.mitre.org/techniques/T1105/
+author: Cyberion Defense Labs — Detection Engineering Practice
+date: 2026-10-15
+modified: 2026-11-10
+tags:
+  - attack.execution
+  - attack.t1059.001
+  - attack.t1105
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_img:
+    - Image|endswith:
+        - '\powershell.exe'
+        - '\pwsh.exe'
+    - OriginalFileName:
+        - 'PowerShell.EXE'
+        - 'pwsh.dll'
+  selection_cradle:
+    CommandLine|contains:
+      - 'Net.WebClient'
+      - 'DownloadString'
+      - 'DownloadFile'
+      - 'Invoke-WebRequest'
+      - 'Invoke-RestMethod'
+      - 'curl '
+      - 'wget '
+      - 'iwr '
+      - 'irm '
+      - 'Start-BitsTransfer'
+  selection_flags:
+    CommandLine|contains:
+      - '-enc'
+      - '-encodedcommand'
+      - '-w hidden'
+      - '-windowstyle hidden'
+      - '-nop'
+      - '-noprofile'
+      - '-ep bypass'
+      - '-executionpolicy bypass'
+  condition: selection_img and (selection_cradle or selection_flags)
+falsepositives:
+  - Administrative automation scripts from management tools (e.g., MECM/SCCM, Intune, Chocolatey, Ansible).
+  - Software installation scripts invoking web downloads with appropriate change tickets.
+level: high
