@@ -1,0 +1,20 @@
+title: Windows Scheduled Task Created
+id: 8c2a7f41-5d91-4b32-9a62-469800000002
+status: experimental
+description: Detects creation of a scheduled task on a Windows system.
+references:
+    - https://attack.mitre.org/techniques/T1053/005/
+author: Cyberion ThreatShield
+date: 2026/11/13
+tags:
+    - attack.t1053.005
+logsource:
+    product: windows
+    service: security
+detection:
+    selection:
+        EventID: 4698
+    condition: selection
+falsepositives:
+    - Legitimate scheduled task creation by administrators or software installers
+level: medium

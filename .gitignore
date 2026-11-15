@@ -1,0 +1,17 @@
+# Raw dataset (download separately)
+datasets/
+
+# Python generated files
+__pycache__/
+*.py[cod]
+.venv/
+
+# Temporary files
+*.tmp
+*.log
+temp-plot.html
+
+# Secrets
+.env
+.env.*
+!.env.example
