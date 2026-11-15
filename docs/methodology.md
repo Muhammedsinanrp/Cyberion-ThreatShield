@@ -155,3 +155,4 @@ When detections or hunts identify confirmed malicious behavior, the engagement f
    - **Benign Positive (BP):** Legitimate, authorized activity (e.g. penetration testing, internal administrative tool) that matches rule logic as designed.
    - **False Positive (FP):** Erroneous alert triggered by normal system operations due to overly broad detection criteria.
 7. **Feedback to Detection Engineering:** Identifying detection gaps and authoring tuning or new rules to prevent recurrence.
+

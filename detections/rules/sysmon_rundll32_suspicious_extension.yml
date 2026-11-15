@@ -40,3 +40,4 @@ detection:
 falsepositives:
   - Third-party legacy business applications executing specialized plugin modules with non-standard extensions.
 level: medium
+

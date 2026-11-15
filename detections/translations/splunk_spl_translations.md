@@ -119,3 +119,4 @@ index=windows_security sourcetype="WinEventLog:Security" (EventCode=4625 OR Even
 | where is_failed>=3 AND is_success>=1
 | table _time, Source_Network_Address, TargetUserName, is_failed, is_success, duration
 ```
+

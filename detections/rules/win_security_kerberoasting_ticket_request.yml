@@ -28,3 +28,4 @@ detection:
 falsepositives:
   - Legacy legacy systems or third-party Active Directory integrations that do not support AES-128/AES-256 Kerberos encryption.
 level: high
+

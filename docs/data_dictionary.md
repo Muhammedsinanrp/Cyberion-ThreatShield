@@ -155,3 +155,4 @@ Detection engineering achieves highest defensibility when detections correlate h
 |  (T1071.001 / T1001)    |                        | Image = rundll32.exe   | ssl.log (JA3 hash)    |
 +-------------------------+------------------------+------------------------+-----------------------+
 ```
+

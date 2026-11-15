@@ -36,3 +36,4 @@ detection:
 falsepositives:
   - Enterprise systems administration scripts or legacy monitoring agents (e.g. older BMC Remedy or Nagios plugins).
 level: high
+

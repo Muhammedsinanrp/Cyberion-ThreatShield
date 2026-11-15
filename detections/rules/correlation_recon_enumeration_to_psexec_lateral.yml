@@ -51,3 +51,4 @@ detection:
 falsepositives:
   - Systems administrators performing manual troubleshooting and remote support using PsExec.
 level: high
+

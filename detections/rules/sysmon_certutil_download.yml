@@ -36,3 +36,4 @@ falsepositives:
   - Legitimate enterprise certificate verification scripts updating CRLs from internal PKI servers.
   - Software deployment tools verifying code signing certificates against Microsoft public endpoints.
 level: high
+

@@ -39,3 +39,4 @@ detection:
 falsepositives:
   - Software development builds on non-standard developer environments without Visual Studio parentage.
 level: medium
+

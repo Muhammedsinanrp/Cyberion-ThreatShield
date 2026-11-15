@@ -37,3 +37,4 @@ detection:
 falsepositives:
   - Extremely rare in modern enterprise networks. Legacy line-of-business component registration over HTTP.
 level: high
+

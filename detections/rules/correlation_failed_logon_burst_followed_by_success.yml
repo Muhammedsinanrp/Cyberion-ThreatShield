@@ -45,3 +45,4 @@ falsepositives:
   - Enterprise vulnerability scanner (e.g., Tenable Nessus, Qualys, Rapid7 Nexpose) executing authenticated network audit scans.
   - Centralized monitoring or directory synchronization services experiencing transient authentication issues.
 level: high
+

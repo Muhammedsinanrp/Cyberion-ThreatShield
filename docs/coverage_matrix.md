@@ -87,3 +87,4 @@ To establish an audited, defensible detection posture for Cyberion Defense Labs'
 1. **Email Telemetry Ingestion (T1566):** Integrate Microsoft Defender for Office 365 / Proofpoint syslog feeds into the SIEM pipeline to capture spearphishing attachments before endpoint execution.
 2. **Cloud Broker Integration (T1567):** Deploy Microsoft Defender for Cloud Apps (MDCA) or Netskope CASB API connectors to detect unauthorized bulk uploads to personal cloud storage.
 3. **Streaming DNS Analytics (T1071.004):** Operationalize Threat Hunt 001's DNS Shannon entropy algorithm into a real-time stream processing job (e.g. Apache Kafka / Logstash ruby filter) to flag DGA and DNS tunneling in real time.
+

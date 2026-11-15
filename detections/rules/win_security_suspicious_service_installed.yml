@@ -58,3 +58,4 @@ falsepositives:
   - Legitimate administrative remote management via Sysinternals PsExec by authorized domain administrators.
   - Software installers executing temporary setup services from %TEMP% with valid vendor signatures.
 level: high
+

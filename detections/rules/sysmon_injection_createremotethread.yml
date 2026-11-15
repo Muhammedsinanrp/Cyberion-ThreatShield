@@ -41,3 +41,4 @@ falsepositives:
   - Diagnostic debuggers (e.g. Visual Studio, WinDbg) attaching to processes for profiling.
   - Endpoint security agents injecting hooking DLLs into target binaries.
 level: critical
+

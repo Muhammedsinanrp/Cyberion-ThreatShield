@@ -53,3 +53,4 @@ falsepositives:
   - Administrative automation scripts from management tools (e.g., MECM/SCCM, Intune, Chocolatey, Ansible).
   - Software installation scripts invoking web downloads with appropriate change tickets.
 level: high
+

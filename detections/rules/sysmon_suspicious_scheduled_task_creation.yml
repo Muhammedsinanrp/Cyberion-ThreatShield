@@ -39,3 +39,4 @@ detection:
 falsepositives:
   - Legitimate enterprise deployment tools or software updaters (e.g. Google Update, Adobe Updater) configuring tasks.
 level: medium
+

@@ -38,3 +38,4 @@ detection:
 falsepositives:
   - Legitimate system troubleshooting by Tier-3 infrastructure or identity engineering teams debugging LSASS memory leaks or crashes.
 level: critical
+

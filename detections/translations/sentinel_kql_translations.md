@@ -118,3 +118,4 @@ failed_logons
 | join kind=inner (successful_logons) on IpAddress
 | project SuccessTime, IpAddress, SuccessUser, FailedCount, Targets
 ```
+

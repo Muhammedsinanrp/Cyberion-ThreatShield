@@ -23,3 +23,4 @@ falsepositives:
   - Automated log rollover in unconfigured test environments (should not occur in production enterprise).
   - System decommissioning or re-imaging procedures by authorized infrastructure engineers.
 level: high
+
