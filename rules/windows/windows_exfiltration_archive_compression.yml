@@ -1,0 +1,27 @@
+title: Data Staging and Compression for Exfiltration
+id: cd-rule-012
+status: experimental
+description: Detects the execution of command-line archiving utilities used to compress sensitive files prior to exfiltration.
+references:
+  - https://attack.mitre.org/techniques/T1560/
+author: Cyberion Defense Labs
+date: 2026/03/18
+tags:
+  - attack.t1560
+  - attack.exfiltration
+logsource:
+  product: windows
+  service: sysmon
+detection:
+  selection:
+    EventID: 1
+    CommandLine|contains:
+      - ' -a '
+      - ' a '
+      - 'tar -cf'
+      - 'Compress-Archive'
+      - 'Get-CimInstance'
+  condition: selection
+falsepositives:
+  - Legitimate backups, log collection, or software archiving routines.
+level: medium

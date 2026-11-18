@@ -1,0 +1,29 @@
+title: System Owner and User Discovery Reconnaissance
+id: cd-rule-011
+status: experimental
+description: Detects execution of reconnaissance commands used by attackers to gather system user and domain information post-compromise.
+references:
+  - https://attack.mitre.org/techniques/T1033/
+author: Cyberion Defense Labs
+date: 2026/03/18
+tags:
+  - attack.t1033
+  - attack.discovery
+logsource:
+  product: windows
+  service: sysmon
+detection:
+  selection:
+    EventID: 1
+    Image|endswith: \whoami.exe
+  selection_net:
+    EventID: 1
+    Image|endswith: \net.exe
+    CommandLine|contains:
+      - user
+      - group
+      - localgroup
+  condition: selection or selection_net
+falsepositives:
+  - Legitimate administrative troubleshooting or user login scripts.
+level: low

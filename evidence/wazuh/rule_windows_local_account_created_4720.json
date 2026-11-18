@@ -1,0 +1,113 @@
+{
+  "timestamp": "2026-11-14T19:10:53.988+0530",
+  "rule": {
+    "level": 8,
+    "description": "User account enabled or created",
+    "id": "60109",
+    "mitre": {
+      "id": [
+        "T1098"
+      ],
+      "tactic": [
+        "Persistence"
+      ],
+      "technique": [
+        "Account Manipulation"
+      ]
+    },
+    "firedtimes": 1,
+    "mail": false,
+    "groups": [
+      "windows",
+      "windows_security",
+      "adduser",
+      "account_changed"
+    ],
+    "pci_dss": [
+      "8.1.2",
+      "10.2.5"
+    ],
+    "gpg13": [
+      "7.10"
+    ],
+    "gdpr": [
+      "IV_35.7.d",
+      "IV_32.2"
+    ],
+    "hipaa": [
+      "164.312.a.2.I",
+      "164.312.a.2.II",
+      "164.312.b"
+    ],
+    "nist_800_53": [
+      "AC.2",
+      "IA.4",
+      "AU.14",
+      "AC.7"
+    ],
+    "tsc": [
+      "CC6.8",
+      "CC7.2",
+      "CC7.3"
+    ]
+  },
+  "agent": {
+    "id": "001",
+    "name": "DESKTOP-G67LTP0",
+    "ip": "192.168.23.134"
+  },
+  "manager": {
+    "name": "cyberion-ubuntu"
+  },
+  "id": "1794663653.2538200",
+  "decoder": {
+    "name": "windows_eventchannel"
+  },
+  "data": {
+    "win": {
+      "system": {
+        "providerName": "Microsoft-Windows-Security-Auditing",
+        "providerGuid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+        "eventID": "4720",
+        "version": "0",
+        "level": "0",
+        "task": "13824",
+        "opcode": "0",
+        "keywords": "0x8020000000000000",
+        "systemTime": "2026-11-14T13:40:53.2633923Z",
+        "eventRecordID": "26428",
+        "processID": "676",
+        "threadID": "11608",
+        "channel": "Security",
+        "computer": "DESKTOP-G67LTP0",
+        "severityValue": "AUDIT_SUCCESS",
+        "message": "\"A user account was created.\r\n\r\nSubject:\r\n\tSecurity ID:\t\tS-1-5-21-3041250095-840937355-1744294825-1001\r\n\tAccount Name:\t\tCyberionAdmin\r\n\tAccount Domain:\t\tDESKTOP-G67LTP0\r\n\tLogon ID:\t\t0x3DDD2B\r\n\r\nNew Account:\r\n\tSecurity ID:\t\tS-1-5-21-3041250095-840937355-1744294825-1003\r\n\tAccount Name:\t\tCyberionTestUser\r\n\tAccount Domain:\t\tDESKTOP-G67LTP0\r\n\r\nAttributes:\r\n\tSAM Account Name:\tCyberionTestUser\r\n\tDisplay Name:\t\t<value not set>\r\n\tUser Principal Name:\t-\r\n\tHome Directory:\t\t<value not set>\r\n\tHome Drive:\t\t<value not set>\r\n\tScript Path:\t\t<value not set>\r\n\tProfile Path:\t\t<value not set>\r\n\tUser Workstations:\t<value not set>\r\n\tPassword Last Set:\t<never>\r\n\tAccount Expires:\t\t<never>\r\n\tPrimary Group ID:\t513\r\n\tAllowed To Delegate To:\t-\r\n\tOld UAC Value:\t\t0x0\r\n\tNew UAC Value:\t\t0x15\r\n\tUser Account Control:\t\r\n\t\tAccount Disabled\r\n\t\t'Password Not Required' - Enabled\r\n\t\t'Normal Account' - Enabled\r\n\tUser Parameters:\t<value not set>\r\n\tSID History:\t\t-\r\n\tLogon Hours:\t\tAll\r\n\r\nAdditional Information:\r\n\tPrivileges\t\t-\""
+      },
+      "eventdata": {
+        "targetUserName": "CyberionTestUser",
+        "targetDomainName": "DESKTOP-G67LTP0",
+        "targetSid": "S-1-5-21-3041250095-840937355-1744294825-1003",
+        "subjectUserSid": "S-1-5-21-3041250095-840937355-1744294825-1001",
+        "subjectUserName": "CyberionAdmin",
+        "subjectDomainName": "DESKTOP-G67LTP0",
+        "subjectLogonId": "0x3ddd2b",
+        "samAccountName": "CyberionTestUser",
+        "displayName": "%%1793",
+        "homeDirectory": "%%1793",
+        "homePath": "%%1793",
+        "scriptPath": "%%1793",
+        "profilePath": "%%1793",
+        "userWorkstations": "%%1793",
+        "passwordLastSet": "%%1794",
+        "accountExpires": "%%1794",
+        "primaryGroupId": "513",
+        "oldUacValue": "0x0",
+        "newUacValue": "0x15",
+        "userAccountControl": "    %%2080    %%2082    %%2084",
+        "userParameters": "%%1793",
+        "logonHours": "%%1797"
+      }
+    }
+  },
+  "location": "EventChannel"
+}

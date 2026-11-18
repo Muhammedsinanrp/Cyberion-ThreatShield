@@ -1,0 +1,26 @@
+title: PowerShell Suspicious Download Cradle
+id: cd-rule-005
+status: experimental
+description: Detects PowerShell executing commands with web download methods, often used to fetch secondary payloads.
+references:
+  - https://attack.mitre.org/techniques/T1059/001/
+author: Cyberion Defense Labs
+date: 2026/03/18
+tags:
+  - attack.t1059.001
+  - attack.execution
+logsource:
+  product: windows
+  service: powershell
+detection:
+  selection:
+    ScriptBlockText|contains:
+      - 'Net.WebClient'
+      - 'DownloadString'
+      - 'DownloadFile'
+      - 'Invoke-WebRequest'
+      - 'iwr '
+  condition: selection
+falsepositives:
+  - Legitimate administrative scripts or software update mechanisms using PowerShell.
+level: medium

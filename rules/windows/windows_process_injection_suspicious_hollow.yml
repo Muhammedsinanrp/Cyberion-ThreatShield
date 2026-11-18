@@ -1,0 +1,25 @@
+title: Suspicious Process Injection via Hollow Process
+id: cd-rule-004
+status: experimental
+description: Detects potential process injection patterns often associated with process hollowing or suspicious memory allocation.
+references:
+  - https://attack.mitre.org/techniques/T1055/012/
+author: Cyberion Defense Labs
+date: 2026/03/18
+tags:
+  - attack.t1055
+  - attack.defense_evasion
+logsource:
+  product: windows
+  service: sysmon
+detection:
+  selection:
+    EventID: 8
+    TargetImage|endswith:
+      - \svchost.exe
+      - \lsass.exe
+      - \explorer.exe
+  condition: selection
+falsepositives:
+  - Legitimate administrative tools or security software performing memory inspection.
+level: high

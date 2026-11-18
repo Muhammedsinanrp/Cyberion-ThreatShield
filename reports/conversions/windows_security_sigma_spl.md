@@ -24,3 +24,11 @@
 ## Limitations
 
 Conversion confirms SPL generation only. Live detection in a Splunk environment has not yet been tested.
+
+## Rule 3: Windows User Account Created
+
+- Event ID: 4720
+- ATT&CK: T1136
+- Status: Converted successfully
+
+    source="WinEventLog:Security" EventCode=4720

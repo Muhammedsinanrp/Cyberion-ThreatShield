@@ -1,0 +1,22 @@
+title: Lateral Movement via PsExec Service Installation
+id: cd-rule-010
+status: experimental
+description: Detects the installation of the typical PSEXESVC service, commonly used by threat actors for lateral movement.
+references:
+  - https://attack.mitre.org/techniques/T1021/002/
+author: Cyberion Defense Labs
+date: 2026/03/18
+tags:
+  - attack.t1021.002
+  - attack.lateral_movement
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4697
+    ServiceName: PSEXESVC
+  condition: selection
+falsepositives:
+  - Legitimate administrative remote execution using PsExec by IT personnel.
+level: high

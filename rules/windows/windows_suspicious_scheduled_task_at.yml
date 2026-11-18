@@ -1,0 +1,26 @@
+title: Suspicious Scheduled Task Creation via Schtasks or At
+id: cd-rule-009
+status: experimental
+description: Detects the creation of scheduled tasks using command-line utilities pointing to suspicious execution paths.
+references:
+  - https://attack.mitre.org/techniques/T1053/005/
+author: Cyberion Defense Labs
+date: 2026/03/18
+tags:
+  - attack.t1053.005
+  - attack.persistence
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4698
+    TaskContent|contains:
+      - \Temp\
+      - \AppData\
+      - powershell.exe
+      - cmd.exe /c
+  condition: selection
+falsepositives:
+  - Legitimate automated software update tasks or administrative scripts.
+level: medium

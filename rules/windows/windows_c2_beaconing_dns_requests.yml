@@ -1,0 +1,22 @@
+title: Suspicious High-Frequency DNS Requests for C2
+id: cd-rule-013
+status: experimental
+description: Detects unusual volumes or patterns of DNS query logs indicative of DNS tunneling or command and control beaconing.
+references:
+  - https://attack.mitre.org/techniques/T1071/004/
+author: Cyberion Defense Labs
+date: 2026/03/18
+tags:
+  - attack.t1071.004
+  - attack.command_and_control
+logsource:
+  product: windows
+  service: dns-client
+detection:
+  selection:
+    EventID: 3008
+    QueryName|length: > 50
+  condition: selection
+falsepositives:
+  - Long legitimate CDN URLs, enterprise internal domain structures, or diagnostic tools.
+level: medium

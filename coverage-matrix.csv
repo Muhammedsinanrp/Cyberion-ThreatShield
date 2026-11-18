@@ -1,0 +1,21 @@
+Technique ID,Technique Name,Tactic,Coverage Status,Supporting Rule ID
+T1078,Valid Accounts,Initial Access,Covered,cd-rule-001
+T1562.001,Impair Defenses: Disable or Modify Tools,Defense Evasion,Covered,cd-rule-014
+T1053.005,Scheduled Task/Job: Scheduled Task,Persistence,Covered,cd-rule-003
+T1055.012,Process Injection: Process Hollowing,Defense Evasion,Covered,cd-rule-004
+T1059.001,Command and Scripting Interpreter: PowerShell,Execution,Covered,cd-rule-005
+T1070,Indicator Removal on Host,Defense Evasion,Covered,cd-rule-006
+T1543.003,Create or Modify System Process: Windows Service,Persistence,Covered,cd-rule-007
+T1003.001,OS Credential Dumping: LSASS Memory,Credential Access,Covered,cd-rule-008
+T1053.005,Scheduled Task/Job: Scheduled Task (Schtasks/At),Persistence,Covered,cd-rule-009
+T1021.002,Remote Services: SMB/Windows Admin Shares,Lateral Movement,Covered,cd-rule-010
+T1033,System Owner/User Discovery,Discovery,Covered,cd-rule-011
+T1560,Archive Collected Data,Exfiltration,Covered,cd-rule-012
+T1071.004,Application Layer Protocol: DNS,Command and Control,Covered,cd-rule-013
+T1003.002,OS Credential Dumping: SAM,Credential Access,Covered,cd-rule-015
+T1110,Brute Force,Credential Access,Partially Covered,N/A
+T1078.003,Local Accounts,Persistence,Covered,windows_local_account_created
+T1070.001,Clear Event Logs,Defense Evasion,Covered,windows_security_log_cleared
+T1087,Account Discovery,Discovery,Not Covered,N/A
+T1046,Network Service Discovery,Discovery,Not Covered,N/A
+T1021.001,Remote Desktop Protocol,Lateral Movement,Not Covered,N/A

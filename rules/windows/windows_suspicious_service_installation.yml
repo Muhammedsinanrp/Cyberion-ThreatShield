@@ -1,0 +1,26 @@
+title: Suspicious Windows Service Installation
+id: cd-rule-007
+status: experimental
+description: Detects the installation of a new Windows service pointing to unusual or temporary directories, often indicative of persistence.
+references:
+  - https://attack.mitre.org/techniques/T1543/003/
+author: Cyberion Defense Labs
+date: 2026/03/18
+tags:
+  - attack.t1543.003
+  - attack.persistence
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4697
+    ServiceFileName|contains:
+      - \Temp\
+      - \Users\Public\
+      - \AppData\Local\Temp\
+      - C:\Windows\Temp\
+  condition: selection
+falsepositives:
+  - Legitimate third-party software installers running from temporary paths.
+level: high
