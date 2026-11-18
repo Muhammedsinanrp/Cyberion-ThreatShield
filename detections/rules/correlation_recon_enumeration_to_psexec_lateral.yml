@@ -1,54 +1,17 @@
-title: Host Reconnaissance Sequence Followed by Remote Service Lateral Movement
-id: e7284910-6a12-4029-9e81-28374650ffff
-status: production
-description: |
-  Detects an attacker lifecycle sequence where discovery and reconnaissance commands (net.exe, whoami.exe, nltest.exe)
-  are executed on an endpoint, followed within 15 minutes by remote service creation (Event ID 7045 or 4697 with PsExec
-  or executable from admin share) targeting an internal server.
-references:
-  - https://attack.mitre.org/techniques/T1087/
-  - https://attack.mitre.org/techniques/T1021/002/
-  - https://attack.mitre.org/techniques/T1543/003/
-author: Cyberion Defense Labs — Detection Engineering Practice
-date: 2026-10-15
-modified: 2026-11-10
-tags:
-  - attack.discovery
-  - attack.lateral_movement
-  - attack.t1087
-  - attack.t1021.002
-  - attack.t1543.003
-logsource:
-  product: windows
-correlation:
-  type: temporal
-  rules:
-    - recon_discovery
-    - service_creation
-  group-by:
-    - User
-  timespan: 15m
-detection:
-  recon_discovery:
-    category: process_creation
-    Image|endswith:
-      - '\net.exe'
-      - '\net1.exe'
-      - '\whoami.exe'
-      - '\nltest.exe'
-      - '\systeminfo.exe'
-  service_creation:
-    service:
-      - system
-      - security
-    EventID:
-      - 7045
-      - 4697
-    ServiceName|contains:
-      - 'PSEXESVC'
-      - 'PAExec'
-  condition: recon_discovery followed_by service_creation by User within 15m
+title: Correlation - Reconnaissance to PsExec Lateral Movement
+id: cd-corr-001
+status: experimental
+description: Correlates user/system discovery reconnaissance followed within a short time window by PsExec remote service installation.
+author: Cyberion Defense Labs
+date: 2026/03/18
+type: temporal
+rules:
+  - windows_discovery_whoami_net
+  - windows_lateral_movement_psexec
+group-by:
+  - ComputerName
+timespan: 15m
+condition: windows_discovery_whoami_net -> windows_lateral_movement_psexec
 falsepositives:
-  - Systems administrators performing manual troubleshooting and remote support using PsExec.
+  - Authorized administrative maintenance scripts performing rapid checks and remote deployments.
 level: high
-

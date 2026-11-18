@@ -3,20 +3,26 @@
 ## 1. Overview & Metadata
 - **Case ID:** INC-2026-001
 - **Severity:** High
-- **Closure Classification:** True Positive
+- **Closure Classification:** True Positive - Resolved
+- **Affected Host:** `WKSTN-FIN-042` (IP: `192.168.1.50`)
 
-## 2. Timeline of Events
-- **02:15:00 UTC:** Initial scheduled task execution (`windows_scheduled_task_created.yml`) triggers an encoded loader script.
-- **02:18:30 UTC:** Process initiates high-frequency DNS requests and periodic TCP connections to external IP `203.0.113.45`.
-- **02:25:00 UTC:** Threat hunt ID 01 flags regular heartbeat traffic intervals.
+## 2. Evidence & Telemetry Sources
+- **Sysmon:** Event ID 3 (Network Connection) and Event ID 1 (Process Creation).
+- **Zeek Logs:** `conn.log` and `dns.log` capturing periodic outbound sessions to external IP `185.220.101.5`.
 
-## 3. Root Cause Analysis
-An unauthenticated external payload dropped via a phishing vector executed local persistence, setting up automated periodic C2 communication beacons.
+## 3. Detailed Investigation Timeline
+- **02:15:00 UTC:** User downloads an obfuscated archive from an external source; a scheduled task (`windows_suspicious_scheduled_task_at.yml`) is registered locally.
+- **02:18:30 UTC:** Encoded PowerShell download cradle executes, establishing periodic TCP connections every 60 seconds to external C2 infrastructure (`185.220.101.5`).
+- **02:25:00 UTC:** Threat Hunt 01 flags regular temporal delta patterns in network telemetry.
+- **02:35:00 UTC:** SOC analyst isolates `WKSTN-FIN-042` and revokes active user session tokens.
 
-## 4. MITRE ATT&CK Mapping
-- **T1053.005** (Scheduled Task)
+## 4. Impact Assessment & Root Cause
+- **Impact:** Moderate risk of internal reconnaissance and potential data staging; containment prevented secondary payload download and exfiltration.
+- **Root Cause Analysis:** Initial compromise via spear-phishing leading to unauthorized local scheduled task creation and automated beaconing.
+
+## 5. MITRE ATT&CK Mapping
+- **T1053.005** (Scheduled Task / Job: Scheduled Task)
 - **T1071.004** (Application Layer Protocol: DNS)
 
-## 5. Closure & Remediation
-- Isolated the compromised host.
-- Terminated active C2 connections, revoked credentials, and deployed Rule #13 to block future occurrences.
+## 6. Closure & Remediation
+- Terminated lingering process trees, removed unauthorized scheduled tasks, and enforced perimeter blocking for IP `185.220.101.5` and domain `update-core-services.internal-sync.net`.

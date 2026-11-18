@@ -1,48 +1,18 @@
-title: Multi-Account Failed Logon Burst Followed by Successful Network Authentication
-id: c1894723-5e91-4478-bc02-19283746eeee
-status: production
-description: |
-  Detects a sequence of multiple failed logon attempts (Event ID 4625, Logon Type 3) targeting different user accounts
-  originating from a single IP address, followed shortly by a successful authentication (Event ID 4624) from that same IP.
-  This correlation pattern strongly indicates successful password spraying or brute force credential compromise.
-references:
-  - https://attack.mitre.org/techniques/T1110/003/
-  - https://attack.mitre.org/techniques/T1078/
-author: Cyberion Defense Labs — Detection Engineering Practice
-date: 2026-10-15
-modified: 2026-11-10
-tags:
-  - attack.credential_access
-  - attack.initial_access
-  - attack.t1110.003
-  - attack.t1078
-logsource:
-  service: security
-  product: windows
-correlation:
-  type: event_count
-  rules:
-    - failed_logon_event
-  group-by:
-    - IpAddress
-  timespan: 5m
-  condition:
-    gte: 3
-action:
-  followup_rule: successful_logon_event
-  group-by:
-    - IpAddress
-  timespan: 5m
-detection:
-  failed_logon_event:
-    EventID: 4625
-    LogonType: 3
-  successful_logon_event:
-    EventID: 4624
-    LogonType: 3
-  condition: failed_logon_event | count(TargetUserName) by IpAddress >= 3 followed_by successful_logon_event by IpAddress within 5m
+title: Correlation - Brute Force Failed Logon Burst Followed by Success
+id: cd-corr-002
+status: experimental
+description: Detects a high volume of failed logon attempts from a single source followed by a successful logon, indicating potential brute force success.
+author: Cyberion Defense Labs
+date: 2026/03/18
+type: value count
+rules:
+  - windows_failed_logon
+  - windows_successful_logon
+group-by:
+  - TargetUserName
+  - SourceIpAddress
+timespan: 10m
+condition: windows_failed_logon > 5 and windows_successful_logon == 1
 falsepositives:
-  - Enterprise vulnerability scanner (e.g., Tenable Nessus, Qualys, Rapid7 Nexpose) executing authenticated network audit scans.
-  - Centralized monitoring or directory synchronization services experiencing transient authentication issues.
+  - Users mistyping passwords multiple times before successfully authenticating.
 level: high
-

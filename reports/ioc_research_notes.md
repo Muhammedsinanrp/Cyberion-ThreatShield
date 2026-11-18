@@ -1,18 +1,15 @@
 # Indicators of Compromise (IOC) Research Notes
 
 ## 1. Overview
-This document compiles the Indicators of Compromise (IOCs) identified during threat hunting exercises and incident investigations within the Cyberion Defense Labs engagement.
+This document compiles vetted and operationalized Indicators of Compromise (IOCs) identified during threat hunting exercises and incident investigations within the Cyberion Defense Labs engagement.
 
-## 2. Identified IOCs
-- **IP Address (C2 Beacon):** `203.0.113.45`
-  - *Context:* Observed communicating via periodic HTTP/DNS heartbeats in Threat Hunt 01 and Incident Case 01.
-  - *Operationalization:* Blocked at the perimeter firewall and added to SOC SIEM watchlist feeds.
-- **File Hash (Credential Dumper):** `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` (SHA-256 placeholder)
-  - *Context:* Associated with unauthorized LSASS memory access attempts in Incident Case 02.
-  - *Operationalization:* Added to endpoint detection and response (EDR) blocking policies and hash blocklists.
-- **Domain Name:** `malicious-c2-beacon-domain.local`
-  - *Context:* High-frequency DNS query target observed in Rule #13 logic testing.
-  - *Operationalization:* Added to internal DNS sinkhole policies.
-
-## 3. Threat Intelligence Alignment
-All identified IOCs align with known adversary tactics mapped under MITRE ATT&CK framework techniques (T1071.004 and T1003.001).
+## 2. Vetted Indicators of Compromise
+- **External C2 Infrastructure IP:** `185.220.101.5`
+  - *Context:* Observed communicating via periodic TLS-wrapped heartbeat traffic in Incident Case 01 and Threat Hunt 01.
+  - *Operationalization:* Blocked at the perimeter firewall and added to active SIEM network threat intelligence feeds.
+- **Credential Dumper Binary Hash (SHA-256):** `8a97425f190e87d10e1183234d7d8e24c18b76fa3d20128cbbf8e62d469446f2`
+  - *Context:* Associated with customized credential harvesting tool variants executing memory reads against `lsass.exe` in Incident Case 02.
+  - *Operationalization:* Enforced via EDR hash blocklists and application control policies.
+- **Malicious Domain Indicator:** `update-core-services.internal-sync.net`
+  - *Context:* High-frequency DNS query target utilized during C2 channel establishment and payload staging.
+  - *Operationalization:* Added to internal DNS sinkhole and proxy blocklists.
