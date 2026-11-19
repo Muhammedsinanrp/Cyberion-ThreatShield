@@ -15,7 +15,7 @@ logsource:
 detection:
   selection:
     EventID: 3008
-    QueryName|length: > 50
+    QueryName|exists: true
   condition: selection
 falsepositives:
   - Long legitimate CDN URLs, enterprise internal domain structures, or diagnostic tools.
