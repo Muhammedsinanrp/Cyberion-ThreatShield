@@ -1,5 +1,5 @@
 title: Suspicious Process Injection via Hollow Process
-id: cd-rule-004
+id: 5e474320-4437-44d2-a9b1-39798e48320b
 status: experimental
 description: Detects potential process injection patterns often associated with process hollowing or suspicious memory allocation.
 references:

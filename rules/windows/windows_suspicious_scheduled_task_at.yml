@@ -1,5 +1,5 @@
 title: Suspicious Scheduled Task Creation via Schtasks or At
-id: cd-rule-009
+id: 8b63ebbe-57b4-471b-989a-7d611a77adf0
 status: experimental
 description: Detects the creation of scheduled tasks using command-line utilities pointing to suspicious execution paths.
 references:

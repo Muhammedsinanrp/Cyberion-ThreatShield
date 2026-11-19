@@ -1,5 +1,5 @@
 title: Suspicious High-Frequency DNS Requests for C2
-id: cd-rule-013
+id: bbf5c486-414c-4b29-892b-061af274d60a
 status: experimental
 description: Detects unusual volumes or patterns of DNS query logs indicative of DNS tunneling or command and control beaconing.
 references:

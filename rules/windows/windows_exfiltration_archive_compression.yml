@@ -1,5 +1,5 @@
 title: Data Staging and Compression for Exfiltration
-id: cd-rule-012
+id: 8278fcdd-77c5-4a40-9e5f-a113b4719f64
 status: experimental
 description: Detects the execution of command-line archiving utilities used to compress sensitive files prior to exfiltration.
 references:

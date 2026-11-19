@@ -1,5 +1,5 @@
 title: System Owner and User Discovery Reconnaissance
-id: cd-rule-011
+id: 5fb5317a-2edd-4bac-becb-5bbaf4ec56ab
 status: experimental
 description: Detects execution of reconnaissance commands used by attackers to gather system user and domain information post-compromise.
 references:

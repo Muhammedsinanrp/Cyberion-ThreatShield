@@ -1,5 +1,5 @@
 title: Suspicious Windows Service Installation
-id: cd-rule-007
+id: a27c8e23-9e55-4975-be10-20ccba0c2318
 status: experimental
 description: Detects the installation of a new Windows service pointing to unusual or temporary directories, often indicative of persistence.
 references:

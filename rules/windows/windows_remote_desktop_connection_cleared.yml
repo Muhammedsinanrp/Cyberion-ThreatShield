@@ -1,5 +1,5 @@
 title: Remote Desktop Connection History Cleared
-id: cd-rule-006
+id: b5ce92b6-2b04-438d-87f6-616c3ab496db
 status: experimental
 description: Detects deletion or clearing of RDP client history (Default.rdp or registry MRU keys) to cover tracks.
 references:

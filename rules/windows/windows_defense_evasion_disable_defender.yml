@@ -1,5 +1,5 @@
 title: Windows Defender Tampering and Disable Attempt
-id: cd-rule-014
+id: cd75aeed-43e8-41d8-b1fc-659d536b55da
 status: experimental
 description: Detects command-line execution attempting to disable Windows Defender real-time protection or tamper with security settings.
 references:

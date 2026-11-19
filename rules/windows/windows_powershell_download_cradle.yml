@@ -1,5 +1,5 @@
 title: PowerShell Suspicious Download Cradle
-id: cd-rule-005
+id: e7a1192c-602e-430c-999b-df3df3a1d7e3
 status: experimental
 description: Detects PowerShell executing commands with web download methods, often used to fetch secondary payloads.
 references:

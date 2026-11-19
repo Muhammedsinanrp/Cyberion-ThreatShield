@@ -1,5 +1,5 @@
 title: Lateral Movement via PsExec Service Installation
-id: cd-rule-010
+id: 516d1c7f-677a-42f9-82f4-9776c0872959
 status: experimental
 description: Detects the installation of the typical PSEXESVC service, commonly used by threat actors for lateral movement.
 references:
