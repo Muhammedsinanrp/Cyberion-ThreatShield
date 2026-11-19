@@ -8,13 +8,11 @@ author: Cyberion Defense Labs
 date: 2026/03/18
 tags:
   - attack.t1055
-  - attack.defense_evasion
 logsource:
+  category: create_remote_thread
   product: windows
-  service: sysmon
 detection:
   selection:
-    EventID: 8
     TargetImage|endswith:
       - \svchost.exe
       - \lsass.exe

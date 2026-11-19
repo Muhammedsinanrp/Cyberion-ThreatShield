@@ -10,14 +10,12 @@ tags:
   - attack.t1033
   - attack.discovery
 logsource:
+  category: process_creation
   product: windows
-  service: sysmon
 detection:
   selection:
-    EventID: 1
     Image|endswith: \whoami.exe
   selection_net:
-    EventID: 1
     Image|endswith: \net.exe
     CommandLine|contains:
       - user

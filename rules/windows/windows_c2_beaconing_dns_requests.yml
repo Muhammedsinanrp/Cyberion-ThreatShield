@@ -8,7 +8,7 @@ author: Cyberion Defense Labs
 date: 2026/03/18
 tags:
   - attack.t1071.004
-  - attack.command_and_control
+  - attack.command-and-control
 logsource:
   product: windows
   service: dns-client

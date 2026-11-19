@@ -10,11 +10,10 @@ tags:
   - attack.t1560
   - attack.exfiltration
 logsource:
+  category: process_creation
   product: windows
-  service: sysmon
 detection:
   selection:
-    EventID: 1
     CommandLine|contains:
       - ' -a '
       - ' a '
