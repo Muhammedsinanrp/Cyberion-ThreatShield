@@ -115,9 +115,9 @@ Cyberion-ThreatShield/
 
 ---
 
-## Sigma detection library (17 YAML files)
+## Detection library (17 YAML files: 14 Sigma rules and 3 correlation candidates)
 
-All 17 Sigma YAML files are located in `detections/rules/` (14 standalone detection rules and 3 correlation candidates).
+The detection library contains 14 standalone Sigma rules in `detections/rules/` and 3 correlation candidates in `detections/correlation_candidates/`. The correlation candidates are not yet validated as formal Sigma correlations.
 
 | # | Rule file | Focus / ATT&CK mapping |
 |---:|---|---|
