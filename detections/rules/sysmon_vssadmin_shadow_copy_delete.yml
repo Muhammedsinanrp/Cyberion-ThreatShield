@@ -1,6 +1,6 @@
 title: Volume Shadow Copy Deletion via VSSAdmin
 id: 41a7c093-9c8e-49b8-a723-95843210eaaa
-status: production
+status: experimental
 description: |
   Detects the execution of vssadmin.exe with arguments to delete volume shadow copies (delete shadows /all /quiet).
   This behavior is a high-confidence indicator of ransomware preparing to encrypt system volumes while preventing

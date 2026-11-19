@@ -1,6 +1,6 @@
 title: LSASS Process Memory Dumping via ProcDump
 id: d4a89e17-73d6-4442-9988-8123af65e333
-status: production
+status: experimental
 description: |
   Detects the execution of Microsoft Sysinternals ProcDump targeting the Local Security Authority Subsystem Service (lsass.exe)
   to generate a process memory dump. Attackers extract plaintext passwords, hashes, and Kerberos tickets from LSASS dumps.

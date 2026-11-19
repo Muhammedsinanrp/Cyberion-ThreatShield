@@ -1,6 +1,6 @@
 title: Rundll32 Execution with Non-Standard Extension or Suspicious Path
 id: 92a1048b-37fe-4d22-811c-2236541ae888
-status: production
+status: experimental
 description: |
   Detects the execution of rundll32.exe loading payload files with anomalous file extensions (such as .bin, .dat, .tmp,
   or .png) or loading modules directly from user-writable directories (Temp, Public, AppData). Attackers use rundll32

@@ -77,20 +77,43 @@ index=windows_security sourcetype="WinEventLog:Security" EventCode=1102
 
 ---
 
-### Rule 5: Suspicious Windows Service Installation
-**Rule ID:** `82b45100-36a8-4e1b-8519-75a892b1e555` | **MITRE ATT&CK:** `T1543.003`, `T1021.002`
+### Rule 5: Suspicious Windows Service Installation - System 7045
+**Rule ID:** `6fbf1262-2cd4-4e1d-aad1-d3a3f3f653ec` | **MITRE ATT&CK:** `T1543.003`
 
 ```spl
-(index=windows_system sourcetype="WinEventLog:System" EventCode=7045) OR 
-(index=windows_security sourcetype="WinEventLog:Security" EventCode=4697)
-    (
-        ImagePath="*\\AppData\\*" OR ImagePath="*\\Users\\Public\\*" OR 
-        ImagePath="*\\Temp\\*" OR ImagePath="*ADMIN$*" OR ImagePath="*C$\\*" OR
-        ServiceFileName="*\\AppData\\*" OR ServiceFileName="*\\Users\\Public\\*" OR 
-        ServiceFileName="*\\Temp\\*" OR ServiceFileName="*ADMIN$*" OR ServiceFileName="*C$\\*" OR
-        ServiceName="*PSEXESVC*" OR ServiceName="*winexe*" OR ServiceName="*PAExec*"
-    )
-| table _time, host, ServiceName, ImagePath, ServiceFileName, ServiceAccount, SubjectUserName
+index=windows_system sourcetype="WinEventLog:System" EventCode=7045
+(
+    ImagePath="*\\AppData\\*" OR
+    ImagePath="*\\Users\\Public\\*" OR
+    ImagePath="*\\Temp\\*" OR
+    ImagePath="*\\Windows\\Temp\\*" OR
+    ImagePath="*ADMIN$*" OR
+    ImagePath="*C$\\*" OR
+    (ServiceName="*PSEXESVC*" AND (ImagePath="*PSEXESVC.exe*" OR ImagePath="*PAExec.exe*")) OR
+    (ServiceName="*winexe*" AND (ImagePath="*PSEXESVC.exe*" OR ImagePath="*PAExec.exe*")) OR
+    (ServiceName="*PAExec*" AND (ImagePath="*PSEXESVC.exe*" OR ImagePath="*PAExec.exe*"))
+)
+| table _time, host, ServiceName, ImagePath, ServiceAccount
+```
+---
+
+### Rule 6: Suspicious Windows Service Installation - Security 4697
+**Rule ID:** `82b45100-36a8-4e1b-8519-75a892b1e555` | **MITRE ATT&CK:** `T1543.003`
+
+```spl
+index=windows_security sourcetype="WinEventLog:Security" EventCode=4697
+(
+    ServiceFileName="*\\AppData\\*" OR
+    ServiceFileName="*\\Users\\Public\\*" OR
+    ServiceFileName="*\\Temp\\*" OR
+    ServiceFileName="*\\Windows\\Temp\\*" OR
+    ServiceFileName="*ADMIN$*" OR
+    ServiceFileName="*C$\\*" OR
+    (ServiceName="*PSEXESVC*" AND (ServiceFileName="*PSEXESVC.exe*" OR ServiceFileName="*PAExec.exe*")) OR
+    (ServiceName="*winexe*" AND (ServiceFileName="*PSEXESVC.exe*" OR ServiceFileName="*PAExec.exe*")) OR
+    (ServiceName="*PAExec*" AND (ServiceFileName="*PSEXESVC.exe*" OR ServiceFileName="*PAExec.exe*"))
+)
+| table _time, host, ServiceName, ServiceFileName, ServiceAccount, SubjectUserName
 ```
 
 ---

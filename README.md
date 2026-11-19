@@ -50,6 +50,7 @@ Cyberion-ThreatShield/
 │   │   ├── sysmon_wmic_process_creation.yml
 │   │   ├── win_security_kerberoasting_ticket_request.yml
 │   │   ├── win_security_log_cleared.yml
+│   │   ├── win_system_suspicious_service_installed.yml
 │   │   └── win_security_suspicious_service_installed.yml
 │   └── translations/
 │       ├── sentinel_kql_translations.md
@@ -114,9 +115,9 @@ Cyberion-ThreatShield/
 
 ---
 
-## Sigma detection library (16 YAML files)
+## Sigma detection library (17 YAML files)
 
-All 16 Sigma YAML files are located in `detections/rules/`.
+All 17 Sigma YAML files are located in `detections/rules/` (14 standalone detection rules and 3 correlation candidates).
 
 | # | Rule file | Focus / ATT&CK mapping |
 |---:|---|---|
@@ -132,16 +133,17 @@ All 16 Sigma YAML files are located in `detections/rules/`.
 | 10 | `sysmon_wmic_process_creation.yml` | WMIC process execution — T1047 |
 | 11 | `win_security_kerberoasting_ticket_request.yml` | Kerberoasting — T1558.003 |
 | 12 | `win_security_log_cleared.yml` | Security log clearing — T1070.001 |
-| 13 | `win_security_suspicious_service_installed.yml` | Windows service installation — T1543.003 |
-| 14 | `correlation_credential_dump_to_network_beaconing.yml` | Credential-dumping activity followed by network beaconing (correlation candidate) |
-| 15 | `correlation_failed_logon_burst_followed_by_success.yml` | Failed-logon burst followed by successful logon (correlation candidate) |
-| 16 | `correlation_recon_enumeration_to_psexec_lateral.yml` | Reconnaissance followed by PsExec lateral movement (correlation candidate) |
+| 13 | `win_system_suspicious_service_installed.yml` | Windows System service installation — Event 7045, T1543.003 |
+| 14 | `win_security_suspicious_service_installed.yml` | Windows Security service installation — Event 4697, T1543.003 |
+| 15 | `correlation_credential_dump_to_network_beaconing.yml` | Credential-dumping activity followed by network beaconing (correlation candidate) |
+| 16 | `correlation_failed_logon_burst_followed_by_success.yml` | Failed-logon burst followed by successful logon (correlation candidate) |
+| 17 | `correlation_recon_enumeration_to_psexec_lateral.yml` | Reconnaissance followed by PsExec lateral movement (correlation candidate) |
 
 The three files prefixed `correlation_` are included as correlation-oriented detection content. Their presence is not a claim that they conform to the formal Sigma correlation specification; validate their schema and semantics before deployment.
 
 ### Related Wazuh rules
 
-The separate `rules/windows/` directory contains Wazuh-oriented YAML detections and `local_rules.xml`. These are not included in the 16-file Sigma count above. Keep the distinction clear:
+The separate `rules/windows/` directory contains Wazuh-oriented YAML detections and `local_rules.xml`. These are not included in the 17-file Sigma content count above. Keep the distinction clear:
 
 - `detections/rules/` — Sigma detection rules.
 - `rules/windows/` — Wazuh-focused rule content and local XML configuration.

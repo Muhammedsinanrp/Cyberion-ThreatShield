@@ -101,7 +101,7 @@
       "tactic": "persistence",
       "score": 100,
       "color": "#81c784",
-      "comment": "Covered by win_security_suspicious_service_installed.yml (82b45100-36a8-4e1b-8519-75a892b1e555)",
+      "comment": "Covered by Windows System 7045 rule (6fbf1262-2cd4-4e1d-aad1-d3a3f3f653ec) and Windows Security 4697 rule (82b45100-36a8-4e1d-aad1-d3a3f3f653ec)",
       "enabled": true
     },
     {

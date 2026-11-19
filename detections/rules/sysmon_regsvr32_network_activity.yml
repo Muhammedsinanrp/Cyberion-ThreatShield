@@ -1,6 +1,6 @@
 title: Regsvr32 Squiblydoo Remote Scriptlet Execution
 id: 3e891b24-90a1-4389-9a2e-43618765e777
-status: production
+status: experimental
 description: |
   Detects the execution of regsvr32.exe invoking scrobj.dll with the '/i:' parameter specifying an external HTTP/HTTPS URL
   or remote scriptlet (Squiblydoo attack technique). This allows adversaries to bypass AppLocker and execute arbitrary

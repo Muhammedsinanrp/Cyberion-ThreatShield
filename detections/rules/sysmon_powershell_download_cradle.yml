@@ -1,6 +1,6 @@
 title: Suspicious PowerShell Download Cradle Execution
 id: a93b41d0-68e1-4c19-91eb-723a1d95e222
-status: production
+status: experimental
 description: |
   Detects PowerShell process creation executing download cradle commands (such as Net.WebClient, DownloadString,
   DownloadFile, Invoke-WebRequest, or iwr) in combination with execution policy bypass or hidden window flags.

@@ -15,3 +15,9 @@ temp-plot.html
 .env
 .env.*
 !.env.example
+
+# Sigma CLI virtual environment
+.venv-sigma/
+
+# Local backup files
+*.bak

@@ -1,6 +1,6 @@
 title: Suspicious Scheduled Task Creation via Schtasks
 id: 55c19082-3f12-4d88-b991-82736450eccc
-status: production
+status: experimental
 description: |
   Detects the creation of scheduled tasks using schtasks.exe configuring tasks that execute binaries from user-writable
   paths (such as Users\Public, Temp, AppData) or configure tasks to run under high-privilege SYSTEM authority.

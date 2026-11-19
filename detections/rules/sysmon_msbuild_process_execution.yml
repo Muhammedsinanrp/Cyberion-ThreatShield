@@ -1,6 +1,6 @@
 title: Suspicious Execution of MSBuild Compiling Inline XML or Project
 id: 7c659102-124b-449e-8c31-6e8721fae666
-status: production
+status: experimental
 description: |
   Detects the execution of Microsoft Build Engine (msbuild.exe) outside of standard developer workflows or compiling
   untrusted XML/CSPROJ payload files stored in user-writable paths. Adversaries abuse MSBuild as a trusted signed

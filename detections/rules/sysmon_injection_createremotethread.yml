@@ -1,6 +1,6 @@
 title: Cross-Process Remote Thread Injection into System Processes
 id: b8173429-0192-4c28-9844-37829104eddd
-status: production
+status: experimental
 description: |
   Detects Sysmon Event ID 8 (CreateRemoteThread) where an untrusted process (such as PowerShell, cmd, or an unclassified binary)
   injects execution threads into critical Windows system processes (such as explorer.exe, svchost.exe, or lsass.exe).

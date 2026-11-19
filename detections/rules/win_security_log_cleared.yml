@@ -1,6 +1,6 @@
 title: Windows Security Event Log Cleared
 id: f71e9842-832a-4f51-b883-29471de8e444
-status: production
+status: experimental
 description: |
   Detects the clearing of the Windows Security Event Log (Event ID 1102). Adversaries clear event logs to hinder
   incident response investigation and destroy forensic evidence of their intrusion and lateral movement.

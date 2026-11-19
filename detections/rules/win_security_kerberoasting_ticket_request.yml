@@ -1,6 +1,6 @@
 title: Kerberos Service Ticket Request with RC4 Encryption (Kerberoasting)
 id: 63b8214f-5182-42da-a590-71829302ebbb
-status: production
+status: experimental
 description: |
   Detects requests for Kerberos service tickets (TGS) using weak RC4-HMAC encryption (TicketEncryptionType: 0x17)
   for user accounts possessing Service Principal Names (SPNs). Attackers request RC4 tickets to extract ticket

@@ -1,8 +1,9 @@
+
 # Cyberion Defense Labs — Microsoft Sentinel KQL Detection Translations
 
-**Document ID:** CDL-DET-V2-KQL  
-**Version:** 2.0  
-**Target Backend:** Microsoft Sentinel / Azure Monitor  
+**Document ID:** CDL-DET-V2-KQL
+**Version:** 2.0
+**Target Backend:** Microsoft Sentinel / Azure Monitor
 **Engine:** Kusto Query Language (KQL) / Advanced Security Information Model (ASIM)
 
 ---
@@ -37,7 +38,7 @@ SecurityEvent
 | where EventID == 4688 or EventID == 1
 | where Process has_any (@"\powershell.exe", @"\pwsh.exe", "PowerShell.EXE")
 | where CommandLine has_any (
-    "Net.WebClient", "DownloadString", "DownloadFile", "Invoke-WebRequest", 
+    "Net.WebClient", "DownloadString", "DownloadFile", "Invoke-WebRequest",
     "Invoke-RestMethod", "curl ", "wget ", "iwr ", "irm ", "Start-BitsTransfer",
     "-enc", "-encodedcommand", "-w hidden", "-ep bypass"
 )
@@ -70,19 +71,30 @@ SecurityEvent
 ```
 
 ---
+### Rule 5: Suspicious Windows Service Installation - System 7045
+**Rule ID:** `6fbf1262-2cd4-4e1d-aad1-d3a3f3f653ec` | **MITRE ATT&CK:** `T1543.003`
 
-### Rule 5: Suspicious Windows Service Installation
-**Rule ID:** `82b45100-36a8-4e1b-8519-75a892b1e555` | **MITRE ATT&CK:** `T1543.003`, `T1021.002`
+```kql
+WindowsEvent
+| where EventID == 7045
+| where
+    ImagePath has_any (@"\AppData\", @"\Users\Public\", @"\Temp\", @"\Windows\Temp\", "ADMIN$", @"C$\")
+    or (ServiceName has_any ("PSEXESVC", "winexe", "PAExec") and ImagePath has_any ("PSEXESVC.exe", "PAExec.exe"))
+| project TimeGenerated, Computer, ServiceName, ImagePath, ServiceAccount
+```
+---
+
+### Rule 6: Suspicious Windows Service Installation - Security 4697
+**Rule ID:** `82b45100-36a8-4e1b-8519-75a892b1e555` | **MITRE ATT&CK:** `T1543.003`
 
 ```kql
 SecurityEvent
-| where EventID == 7045 or EventID == 4697
-| extend ServicePath = coalesce(ImagePath, ServiceFileName)
-| where ServicePath has_any (@"\AppData\", @"\Users\Public\", @"\Temp\", @"\Windows\Temp\", "ADMIN$", @"C$\")
-    or ServiceName has_any ("PSEXESVC", "winexe", "PAExec")
-| project TimeGenerated, Computer, ServiceName, ServicePath, ServiceAccount, SubjectUserName
+| where EventID == 4697
+| where
+    ServiceFileName has_any (@"\AppData\", @"\Users\Public\", @"\Temp\", @"\Windows\Temp\", "ADMIN$", @"C$\")
+    or (ServiceName has_any ("PSEXESVC", "winexe", "PAExec") and ServiceFileName has_any ("PSEXESVC.exe", "PAExec.exe"))
+| project TimeGenerated, Computer, ServiceName, ServiceFileName, ServiceAccount, SubjectUserName
 ```
-
 ---
 
 ### Rule 10: Volume Shadow Copy Deletion via VSSAdmin

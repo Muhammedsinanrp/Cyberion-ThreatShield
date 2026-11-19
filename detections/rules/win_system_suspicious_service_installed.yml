@@ -1,0 +1,42 @@
+title: Suspicious Windows Service Installation - System 7045
+id: 6fbf1262-2cd4-4e1d-aad1-d3a3f3f653ec
+status: experimental
+description: Detects suspicious Windows service installations through System Event ID 7045.
+author: Cyberion Defense Labs
+date: 2026-11-18
+references:
+  - https://attack.mitre.org/techniques/T1543/003/
+  - https://attack.mitre.org/techniques/T1021/002/
+tags:
+  - attack.persistence
+  - attack.privilege_escalation
+  - attack.lateral_movement
+  - attack.t1543.003
+  - attack.t1021.002
+logsource:
+  product: windows
+  service: system
+detection:
+  selection_event:
+    EventID: 7045
+  selection_suspicious_paths:
+    ImagePath|contains:
+      - '\AppData\'
+      - '\Users\Public\'
+      - '\Temp\'
+      - '\Windows\Temp\'
+      - 'ADMIN$'
+      - 'C$\'
+  selection_known_tools:
+    ServiceName|contains:
+      - 'PSEXESVC'
+      - 'winexe'
+      - 'PAExec'
+    ImagePath|contains:
+      - 'PSEXESVC.exe'
+      - 'PAExec.exe'
+  condition: selection_event and (selection_suspicious_paths or selection_known_tools)
+falsepositives:
+  - Authorized administrative use of PsExec or other remote management tools.
+  - Legitimate software installers using temporary service paths.
+level: high

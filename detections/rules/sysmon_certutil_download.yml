@@ -1,6 +1,6 @@
 title: Ingress Tool Transfer Via Certutil URLCache Flag
 id: 5b2e1e0a-42c2-4a0b-8d5c-9c7ef2b6e111
-status: production
+status: experimental
 description: |
   Detects the execution of certutil.exe with flags commonly used to download remote files from the internet,
   including '-urlcache', '-split', and '-f'. Adversaries leverage certutil.exe as a Living-off-the-Land Binary (LOLBAS)
