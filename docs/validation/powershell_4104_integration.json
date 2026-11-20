@@ -1,0 +1,19 @@
+[
+  {
+    "timestamp": "2026-11-20T10:53:53.823+0530",
+    "rule": {
+      "id": "100125",
+      "level": 5,
+      "description": "Cyberion: Temporary PowerShell EventChannel integration validation"
+    },
+    "agent": {
+      "id": "001",
+      "name": "DESKTOP-G67LTP0"
+    },
+    "event": {
+      "eventID": "4104",
+      "channel": "Microsoft-Windows-PowerShell/Operational",
+      "scriptBlockText": "Write-Output 'CYBERION-4104-INTEGRATION-20261119212353'"
+    }
+  }
+]
