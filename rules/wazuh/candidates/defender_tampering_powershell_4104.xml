@@ -1,0 +1,11 @@
+<group name="cyberion,windows,powershell,">
+  <rule id="100123" level="10">
+    <if_sid>91802</if_sid>
+    <field name="win.eventdata.scriptBlockText" type="pcre2">(?i)^\s*Set-MpPreference\s+-DisableRealtimeMonitoring\s+(\$true|1)(?=\s|$)</field>
+    <description>Cyberion: Possible Defender real-time monitoring tampering via PowerShell script block</description>
+    <mitre>
+      <id>T1562.001</id>
+    </mitre>
+    <group>defense_evasion,defender_tampering,</group>
+  </rule>
+</group>
