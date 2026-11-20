@@ -96,4 +96,3 @@ Type one log per line
 	win.system.eventID: '4104'
 	win.system.message: '# Set-MpPreference -DisableRealtimeMonitoring $true'
 	win.system.providerName: 'Microsoft-Windows-PowerShell'
-
