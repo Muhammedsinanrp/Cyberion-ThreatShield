@@ -11,6 +11,18 @@ Cyberion ThreatShield is a hands-on cybersecurity detection and response project
 
 ## VMware Lab Machines, IP Addresses and Purpose
 
+### Machines documented — overview
+
+| Machine | IP address | Purpose |
+| --- | --- | --- |
+| Ubuntu TEST Wazuh Manager | `192.168.23.136` | Security monitoring, log analysis, custom detection rules |
+| Windows 10 TEST VM | `192.168.23.134` | Generate Windows security telemetry and test detections |
+| Ubuntu secondary interface | `192.168.157.153` | Secondary VMware network |
+| Windows secondary interface | `192.168.157.151` | Secondary VMware network |
+| Production Wazuh Manager | `192.168.23.133` | Production system — **excluded from testing** |
+
+### Detailed machine configuration
+
 The table records the **actual machines used in the TEST detection lab**. Addresses are private lab IPs observed from Ubuntu `ifconfig` and Windows `ipconfig` outputs dated 2026-11-21.
 
 | Machine / VMware tab | Operating system and purpose | TEST / VMware IP addresses | Function |
