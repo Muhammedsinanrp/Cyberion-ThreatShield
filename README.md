@@ -235,3 +235,17 @@ Check the installed Sigma CLI/backend versions and pipeline names if a command d
 
 **Project:** CDL-DET-V2  
 **Repository:** [Muhammedsinanrp/Cyberion-ThreatShield](https://github.com/Muhammedsinanrp/Cyberion-ThreatShield)
+
+
+## 2026-11-21 Project documentation update
+
+The report has been expanded to describe the actual **Ubuntu/Windows VMware TEST lab**, both host network interfaces, security tools, and the verified Wazuh detection results. The following evidence-aware documents are now maintained in GitHub:
+
+- [Updated technical project report](./docs/PROJECT_REPORT_2026-11-21.md)
+- [VMware machines, network interfaces and tools](./docs/VMWARE_TEST_LAB_ARCHITECTURE_2026-11-21.md)
+- [PRD audit and outstanding validation work](./docs/PRD_COMPLIANCE_AUDIT_2026-11-21.md)
+- [PRD compliance matrix](./docs/PRD_COMPLIANCE_MATRIX_2026-11-21.csv)
+
+**Live result:** Wazuh custom rule `100010` generated six TEST alerts for local account discovery; these were paired in three groups and must not be interpreted as six independent incidents. Built-in PowerShell rule `91816` confirmed 4104 telemetry collection. Remaining custom-rule effectiveness is not fully verified. **Release remains STAGED — NOT PRODUCTION APPROVED.**
+
+The corresponding editable Word/PDF reports and PowerPoint presentation are held outside this public repository until their contents have been reviewed for sensitive information. Do not assume raw lab telemetry is safe to publish.
