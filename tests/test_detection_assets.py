@@ -5,21 +5,33 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 SIGMA_DIR = ROOT / "detections" / "rules"
+SECOND_SIGMA_DIR = ROOT / "rules" / "windows"
 CORRELATION_DIR = ROOT / "detections" / "correlation_candidates"
 
 
+def all_sigma_files():
+    return sorted(SIGMA_DIR.glob("*.yml")) + sorted(SECOND_SIGMA_DIR.glob("*.yml"))
+
+
 def test_sigma_rule_count():
-    assert len(list(SIGMA_DIR.glob("*.yml"))) == 14
+    assert len(all_sigma_files()) >= 15, "PRD requires at least 15 detection rules"
 
 
 def test_sigma_rule_required_fields():
-    for path in SIGMA_DIR.glob("*.yml"):
+    identifiers = set()
+    for path in all_sigma_files():
         rule = yaml.safe_load(path.read_text(encoding="utf-8"))
 
         assert isinstance(rule, dict), path.name
 
-        for field in ("title", "id", "logsource", "detection"):
+        for field in ("title", "id", "status", "description", "references",
+                      "tags", "logsource", "detection", "falsepositives", "level"):
             assert field in rule, f"{path.name}: missing {field}"
+        assert rule["id"] not in identifiers, f"Duplicate Sigma ID: {rule['id']}"
+        identifiers.add(rule["id"])
+        assert isinstance(rule["detection"], dict), path.name
+        assert isinstance(rule["logsource"], dict), path.name
+        assert "condition" in rule["detection"], path.name
 
 
 def test_correlation_candidates_preserved():
@@ -38,7 +50,8 @@ def test_sample_telemetry_valid_json():
         assert len(events) > 0, path.name
 
 
-def test_live_wazuh_alert_evidence():
+def test_bundled_wazuh_alert_json_structure():
+    """Check a stored JSON artifact; does NOT attest to live rule execution."""
     path = ROOT / "docs/validation/defender_tampering_alert.json"
     alert = json.loads(path.read_text(encoding="utf-8"))
 
