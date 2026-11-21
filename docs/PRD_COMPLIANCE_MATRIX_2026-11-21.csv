@@ -1,0 +1,15 @@
+Requirement,Target,Observed,Assessment,Outstanding work
+Sigma detection rules,15+,29 YAML files across two folders,PARTIAL,Review overlaps and independently validate each rule with real telemetry
+Correlation detections,3+,3 candidate rules,PARTIAL,Test ordered multi-event correlation and temporal joins
+ATT&CK coverage matrix,20+ techniques,20 rows,PARTIAL,Reconcile coverage labels with reproducible evidence
+Telemetry sources and data dictionary,3 types,Sysmon Windows Security and Zeek samples,PRESENT,Confirm dataset provenance and license
+Threat hunts,2+,4 hunt documents,PARTIAL,Corroborate methodology timestamps findings and negative results
+Incident case reports,2+,2 case reports and an additional incident narrative,PARTIAL,Verify timelines root cause impact and closure
+IR playbooks,3+,3 written playbooks,PRESENT,Review procedural usability
+IOC research,Required,IOC research notes present,PRESENT,Verify attribution and operationalization
+False positive tuning,3 rule tuning passes,Tuning documentation present,PARTIAL,Reproduce before and after tests
+Executive summary,Required,Report present,REVISE,Remove unsupported comprehensive validation claims
+Methodology and provenance,Required,Methodology and provenance documents present,PRESENT,Verify reproducibility
+Final presentation,Required,Presentation outline in repository; PPTX prepared offline,PREPARED,Upload reviewed presentation separately
+Version control,Meaningful history,GitHub repository exists,PARTIAL,Review commit history quality
+Real telemetry rule validation,All submitted rules,Six live alerts from custom rule 100010 only,NOT MET,Validate remaining rules individually
