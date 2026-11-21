@@ -9,6 +9,29 @@ Cyberion ThreatShield is a hands-on cybersecurity detection and response project
 
 ---
 
+## VMware Lab Machines, IP Addresses and Purpose
+
+The table records the **actual machines used in the TEST detection lab**. Addresses are private lab IPs observed from Ubuntu `ifconfig` and Windows `ipconfig` outputs dated 2026-11-21.
+
+| Machine / VMware tab | Operating system and purpose | TEST / VMware IP addresses | Function |
+| --- | --- | --- | --- |
+| `cyberion-wazuh-lab` / `cyberion-virtual-machine` | Ubuntu 22.04.5; **TEST Wazuh Manager** 4.14.10-1 | `ens34: 192.168.23.136` (host-only TEST network); `ens33: 192.168.157.153` (secondary VMware network) | Receives Windows agent telemetry, processes Sysmon/PowerShell logs, evaluates custom detection rules and writes alerts |
+| `Windows 10 x64` / `CYBERION-WIN10-LAB` (hostname `DESKTOP-G67LTP0`) | Windows 10 Enterprise Evaluation; **TEST endpoint** with Wazuh Agent 4.14.10 and Sysmon64 | `Ethernet0: 192.168.23.134` (host-only TEST network); `Ethernet1: 192.168.157.151` (secondary VMware network) | Generates real Windows security and Sysmon telemetry, including PowerShell Event ID 4104, for authorized defensive testing |
+| `Ubuntu 64-bit` | Separate Ubuntu VMware tab; exact hostname/purpose not established from the screenshot alone | **Not verified for this tab** | Kept separate from the identified TEST manager; never assume it is safe to test on |
+| Separate **PRODUCTION** Wazuh Manager | Existing Ubuntu Wazuh server outside TEST validation | `192.168.23.133` | **Production-only; never modified or used for test attacks** |
+
+**TEST telemetry flow:** `Windows 192.168.23.134 → Wazuh Agent → Ubuntu Wazuh TEST Manager 192.168.23.136 → custom rules → alerts.json`.
+
+**Networking:** Both TEST VMs share `192.168.23.0/24` for isolated agent-manager communication and `192.168.157.0/24` for a second VMware network. Windows Ethernet0 has no default gateway; Windows Ethernet1 reports `192.168.157.2` as gateway. Ubuntu's gateways were not shown by `ifconfig`. The exact VMware mode of the second network is not confirmed.
+
+**Tools used:** VMware, Ubuntu, Windows 10, Wazuh Manager/Agent, Sysmon, Windows Event Viewer and PowerShell Script Block Logging, Sigma rules, MITRE ATT&CK, Python 3, SSH/SCP, `wazuh-analysisd -t`, `ifconfig`, `ipconfig`, `sha256sum`.
+
+**Validated result:** custom rule `100010` produced six real Windows EventChannel alerts in the TEST lab (three paired groups). Other experimental custom rules have not all been validated live. **STAGED — NOT PRODUCTION APPROVED.**
+
+See [full lab architecture and validation notes](./docs/VMWARE_TEST_LAB_ARCHITECTURE_2026-11-21.md).
+
+---
+
 ## Repository structure
 
 The tree below reflects the current repository paths. It is documentation only; no folders or project files have been moved or deleted.
